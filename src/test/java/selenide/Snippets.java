@@ -21,20 +21,23 @@ public class Snippets {
     open("/", AuthenticationType.BASIC,
             new BasicAuthCredentials("", "user", "password"));
 
-    Selenide.back();
-    Selenide.refresh();
+    Selenide.back(); //эмуляция кнопок "Назад"
+    Selenide.refresh(); //эмуляция кнопок "Обновить"
 
+    //последовательность команд используется для гарантии разлогина в начале теста
     Selenide.clearBrowserCookies();
     Selenide.clearBrowserLocalStorage();
     executeJavaScript("sessionStorage.clear();"); // no Selenide command for this yet
 
+    //диалоговые окна
     Selenide.confirm(); // OK in alert dialogs
     Selenide.dismiss(); // Cancel in alert dialogs
 
     Selenide.closeWindow(); // close active tab
     Selenide.closeWebDriver(); // close browser completely
 
-    Selenide.switchTo().frame("new");
+    //frame это страничка в страничке, элементы из frame нельзя найти
+    Selenide.switchTo().frame("new"); // перейти к фрейму
     Selenide.switchTo().defaultContent(); // return from frame back to the main DOM
 
     Selenide.switchTo().window("The Internet");
@@ -84,10 +87,10 @@ public class Snippets {
     $("").doubleClick();
     $("").contextClick();
 
-    $("").hover();
+    $("").hover(); // поднести мышку и не кликать
 
-    $("").setValue("text");
-    $("").append("text");
+    $("").setValue("text"); //новое значение вместо старого
+    $("").append("text"); //добавит в конец
     $("").clear();
     $("").setValue(""); // clear
 
